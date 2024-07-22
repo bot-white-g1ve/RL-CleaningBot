@@ -11,11 +11,17 @@ class World_2D:
         return self.position
 
     def step(self, action):
-        if action == '0' and self.position != [0]:
+        if action == 'LEFT' and self.position != [0]:
             self.position[0] -= 1
-        elif action == '1' and self.position != [self.size-1]:
+        elif action == 'RIGHT' and self.position != [self.size-1]:
             self.position[0] += 1
         
-        step_reward = 1
+        step_reward = -1
         done = False
-        if self.position[0] == 
+        if self.position[0] == self.size-1:
+            step_reward = 10
+            done = True
+        
+        return self.position, step_reward, done
+
+
