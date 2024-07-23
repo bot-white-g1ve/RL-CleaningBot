@@ -1,4 +1,6 @@
 import random
+import os
+
 class World_2D:
     def __init__(self, len):
         self.size = len
@@ -8,6 +10,7 @@ class World_2D:
             self.position = [random.randint(0, self.size-1)]
             if self.position != [self.size-1]:
                 break
+        self.print_world()
         return self.position
 
     def step(self, action):
@@ -22,6 +25,12 @@ class World_2D:
             step_reward = 10
             done = True
         
+        self.print_world()
         return self.position, step_reward, done
 
-
+    def print_world(self):
+        os.system('cls')
+        world = ['-' for _ in range(self.size)]
+        world[self.position[0]] = 'R'
+        world[-1] = 'T'
+        print(''.join(world))
